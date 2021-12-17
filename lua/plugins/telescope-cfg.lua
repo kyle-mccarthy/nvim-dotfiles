@@ -1,5 +1,5 @@
 local map = vim.api.nvim_set_keymap
-local options = { noremap = true, silent = false }
+local options = {noremap = true, silent = false}
 
 map('n', '<leader>t', '<cmd>lua require("telescope.builtin").find_files()<CR>', options)
 map('n', '<leader>tg', '<cmd>lua require("telescope.builtin").live_grep()<CR>', options)
@@ -23,8 +23,8 @@ local telescope = require("telescope")
 telescope.setup {
   defaults = {
     mappings = {
-      i = { ["<c-t>"] = trouble.open_with_trouble },
-      n = { ["<c-t>"] = trouble.open_with_trouble },
-    },
-  },
+      i = {["<c-t>"] = trouble.open_with_trouble},
+      n = {["<c-t>"] = trouble.open_with_trouble}
+    }
+  }
 }

@@ -1,56 +1,67 @@
-return require('packer').startup(function()
+local cb = function(use)
   use 'wbthomason/packer.nvim'
 
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 
   -- fzf
-  use { 'junegunn/fzf' }
-  use { 'junegunn/fzf.vim' }
-  use { 'ojroques/nvim-lspfuzzy' }
-  use { 'simrat39/rust-tools.nvim' }
+  use {'junegunn/fzf'}
+  use {'junegunn/fzf.vim'}
+  use {'ojroques/nvim-lspfuzzy'}
 
   -- ui
-  use { 'kyazdani42/nvim-web-devicons' }
-  use { 'tjdevries/colorbuddy.nvim' }
-  use { '~/.config/nvim/colors/onedark.nvim' }
-  use { 'olimorris/onedarkpro.nvim' }
-  use { 'akinsho/nvim-bufferline.lua' }
-  use { 'itchyny/lightline.vim' }
-  use { 'folke/trouble.nvim' }
-  use { 'preservim/nerdtree' }
+  use {'kyazdani42/nvim-web-devicons'}
+  use {'tjdevries/colorbuddy.nvim'}
+  use {'~/.config/nvim/colors/onedark.nvim'}
+  use {'olimorris/onedarkpro.nvim'}
+  use {'akinsho/nvim-bufferline.lua'}
+  -- use {'itchyny/lightline.vim'}
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = {'kyazdani42/nvim-web-devicons', opt = true}
+  }
+  use {'folke/trouble.nvim'}
+  use {'preservim/nerdtree'}
   use {
     'nvim-telescope/telescope.nvim',
-    requires = { {'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'} }
+    requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
   }
 
   -- lsp
-  use { 'neovim/nvim-lspconfig' }
-  use { 'williamboman/nvim-lsp-installer' }
-  use { 'nvim-lua/lsp-status.nvim' }
-  use { 'hrsh7th/cmp-vsnip', requires = 'hrsh7th/nvim-cmp' }
-  use { 'hrsh7th/vim-vsnip' }
-  use { 'hrsh7th/cmp-path', requires = 'hrsh7th/nvim-cmp' }
-  use { 'hrsh7th/cmp-nvim-lsp', requires = 'hrsh7th/nvim-cmp' }
-  use { 'hrsh7th/cmp-buffer', requires = 'hrsh7th/nvim-cmp' }
-  use { 'hrsh7th/nvim-cmp' }
-  use { 'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp' }
-  use { 'onsails/lspkind-nvim' }
-  
-  use { 'windwp/nvim-autopairs' }
-  use { 'josa42/nvim-lightline-lsp', requires = 'itchyny/lightline.vim' }
-  use { 'RRethy/nvim-treesitter-textsubjects' }
-  use { 'lewis6991/spellsitter.nvim' }
+  use {'neovim/nvim-lspconfig'}
+  use {'williamboman/nvim-lsp-installer'}
+  use {'nvim-lua/lsp-status.nvim'}
+  use {'hrsh7th/cmp-vsnip', requires = 'hrsh7th/nvim-cmp'}
+  use {'hrsh7th/vim-vsnip'}
+  use {'hrsh7th/cmp-path', requires = 'hrsh7th/nvim-cmp'}
+  use {'hrsh7th/cmp-nvim-lsp', requires = 'hrsh7th/nvim-cmp'}
+  use {'hrsh7th/cmp-buffer', requires = 'hrsh7th/nvim-cmp'}
+  use {'hrsh7th/nvim-cmp'}
+  use {
+    'tzachar/cmp-tabnine',
+    run = './install.sh',
+    requires = 'hrsh7th/nvim-cmp'
+  }
+  use {'onsails/lspkind-nvim'}
+
+  use {'windwp/nvim-autopairs'}
+  -- use {'josa42/nvim-lightline-lsp', requires = 'itchyny/lightline.vim'}
+  use {'RRethy/nvim-treesitter-textsubjects'}
+  use {'lewis6991/spellsitter.nvim'}
+  use {'simrat39/rust-tools.nvim'}
+  use {'andymass/vim-matchup'}
+  use {'jose-elias-alvarez/null-ls.nvim'}
 
   -- typescript
-  use { 'jose-elias-alvarez/nvim-lsp-ts-utils' }
-  use { 'windwp/nvim-ts-autotag' }
-  use { 'JoosepAlviste/nvim-ts-context-commentstring' }
+  -- use {'jose-elias-alvarez/nvim-lsp-ts-utils'}
+  use {'windwp/nvim-ts-autotag'}
+  use {'JoosepAlviste/nvim-ts-context-commentstring'}
 
   -- utils
-  use { 'nvim-lua/plenary.nvim' }
-  use { 'tpope/vim-abolish' } -- better substitution
-  use { 'tpope/vim-surround' }
-  use { 'b3nj5m1n/kommentary' } 
-  use { 'jeffkreeftmeijer/vim-numbertoggle' }
+  use {'nvim-lua/plenary.nvim'}
+  use {'tpope/vim-abolish'} -- better substitution
+  use {'tpope/vim-surround'}
+  use {'b3nj5m1n/kommentary'}
+  use {'jeffkreeftmeijer/vim-numbertoggle'}
+end
 
-end)
+return require('packer').startup(cb)

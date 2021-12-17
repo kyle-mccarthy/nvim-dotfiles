@@ -1,0 +1,12 @@
+.netrwhist
+colors
+plugin
+spell
+
+lua/plugins/efm.lua
+lua/plugins/headwind.lua
+lua/plugins/lsp.manual.lua
+lua/plugins/rust-tools.lua
+
+lua/colors.lua
+

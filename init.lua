@@ -20,15 +20,18 @@ vim.g.python_host_prog = '/Users/kylemccarthy/.pyenv/versions/nvim2/bin/python'
 vim.g.python3_host_prog = '/Users/kylemccarthy/.pyenv/versions/nvim3/bin/python'
 
 require('plugins')
-require('plugins.cmp')
+require('plugins.cmp-cfg')
 require('plugins.lsp')
 require('plugins.treesitter')
-require('plugins.lightline')
-require('plugins.trouble')
+require('plugins.lualine-cfg')
+require('plugins.trouble-cfg')
 require('plugins.nerdtree')
 require('plugins.autopairs')
 require('plugins.kommentary')
-require('plugins.telescope')
+require('plugins.telescope-cfg')
+require('plugins.null-ls-cfg')
+
+require('settings')
 
 vim.cmd [[colorscheme onedark]]
 
@@ -38,15 +41,5 @@ vim.cmd [[command! PackerSync packadd packer.nvim | lua require('plugins').sync(
 vim.cmd [[command! PackerClean packadd packer.nvim | lua require('plugins').clean()]]
 vim.cmd [[command! PackerCompile packadd packer.nvim | lua require('plugins').compile()]]
 
-require('bufferline').setup{}
-
-vim.cmd([[
-  autocmd FileType lua setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
-  autocmd FileType typescript setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
-  autocmd FileType typescriptreact setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
-]])
-
-vim.api.nvim_set_keymap('n', '<C-l>', ':noh<CR>', { noremap = true, nowait = true, silent = true })
-
-
+require('bufferline').setup {}
 
