@@ -1,14 +1,15 @@
 require('nvim-treesitter.configs').setup(
   {
-    ensure_installed = 'maintained',
+    ensure_installed = 'all',
     highlight = {enable = true},
-    incremental_selection = {enable = true},
-    indent = {enable = true},
-    autopairs = {enable = true},
-    autotag = {enable = true},
-    textsubjects = {enable = true},
-    context_commentstring = {enable = true},
-    matchup = {enable = true}
+    -- incremental_selection = {enable = true},
+    indent = {enable = true, disable = {"python"}},
+    matchup = {enable = true},
+    rainbow = {
+      enable = true,
+      extended_mode = true,
+      disable = {"tsx"}
+    }
   }
 )
 

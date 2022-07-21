@@ -13,3 +13,6 @@ vim.api.nvim_set_keymap(
 vim.api.nvim_set_keymap(
   'n', '<C-f>', ':NERDTreeFind<CR>', {noremap = true, silent = true}
 )
+
+vim.api.nvim_set_var('NERDTreeIgnore', {'^__pycache__$'})
+
