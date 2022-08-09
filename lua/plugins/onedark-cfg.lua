@@ -22,7 +22,9 @@ theme.setup {
     NvimTreeNormal = { bg = '$bg_d1'},
     NvimTreeVertSplit = { fg = '$bg_d1', bg = '$bg_d1'},
     NvimTreeEndOfBuffer = { bg = '$bg_d1'},
-    polarSemicolon = { fg = '$fg' }
+    polarSemicolon = { fg = '$fg' },
+
+    DiagnosticUnderlineError = { fg = '$red', curl = true }
   }
 }
 

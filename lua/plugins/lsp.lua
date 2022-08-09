@@ -1,4 +1,22 @@
-require("nvim-lsp-installer").setup {}
+require("mason").setup()
+require("mason-lspconfig").setup(
+  {
+    ensure_installed = {
+      "rust_analyzer",
+      "eslint",
+      "grammarly",
+      "jsonls",
+      "marksman",
+      "tsserver",
+      "yamlls",
+      "denols"
+    }
+  }
+)
+local inlay_hints = require("inlay-hints")
+
+inlay_hints.setup({only_current_line = true})
+
 local lspconfig = require("lspconfig")
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(
@@ -54,7 +72,61 @@ lspconfig.pyright.setup {capabilities = capabilities}
 
 lspconfig.rust_analyzer.setup {
   capabilities = capabilities,
-  settings = {rustfmt = {extraArgs = {"+nightly"}}}
+  settings = {
+    ["rust-analyzer"] = {
+      checkOnSave = {
+        allFeatures = true,
+        overrideCommand = {
+          'cargo',
+          'clippy',
+          '--workspace',
+          '--message-format=json',
+          '--all-targets',
+          '--all-features'
+        }
+      },
+      rustfmt = {extraArgs = {"+nightly"}},
+      completion = {callable = {snippets = "fill_arguments"}}
+    }
+  },
+  on_attach = function(c, bufnr)
+
+    vim.api.nvim_create_autocmd(
+      {
+        "BufWritePost",
+        "BufReadPost",
+        "BufEnter",
+        "BufWinEnter",
+        "TabEnter",
+        "TextChanged",
+        "TextChangedI"
+      }, {
+        buffer = bufnr,
+        callback = function()
+          inlay_hints.cache()
+        end
+      }
+    )
+
+    vim.api.nvim_buf_attach(
+      bufnr, false, {
+        on_detach = function()
+          inlay_hints.clear_cache(bufnr)
+        end
+      }
+    )
+
+    vim.api.nvim_create_autocmd(
+      {"CursorHold", "CursorMoved"}, {
+        buffer = bufnr,
+        callback = function()
+          inlay_hints.render()
+        end
+      }
+    )
+
+    inlay_hints.cache()
+  end
 }
 
 lspconfig.dockerls.setup {capabilities = capabilities}
@@ -152,19 +224,16 @@ map('n', '<leader>e', '<cmd>ShowError<CR>', options)
 
 -- cosmetics
 vim.fn.sign_define(
-  'DiagnosticSignError', {text = '', texthl = 'DiagnosticsDefaultError'}
+  'DiagnosticSignError', {text = '', texthl = 'DiagnosticSignError'}
 ) -- error
 vim.fn.sign_define(
-  'DiagnosticSignWarning', {text = '', texthl = 'DiagnosticsDefaultWarning'}
+  'DiagnosticSignWarning', {text = '', texthl = 'DiagnosticSignWarning'}
 ) -- warning
 vim.fn.sign_define(
-  'DiagnosticSignHint', {text = '', texthl = 'DiagnosticsDefaultHint'}
+  'DiagnosticSignHint', {text = '', texthl = 'DiagnosticSignHint'}
 ) -- hint
 vim.fn.sign_define(
-  'DiagnosticSignInformation', {
-    text = '',
-    texthl = 'DiagnosticsDefaultInformation'
-  }
+  'DiagnosticSignInformation', {text = '', texthl = 'DiagnosticInformation'}
 ) -- information
 
 -- formatting

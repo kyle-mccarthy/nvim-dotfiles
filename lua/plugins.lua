@@ -1,7 +1,6 @@
 local cb = function(use)
   use 'wbthomason/packer.nvim'
 
-
   -- fzf
   use {'junegunn/fzf'}
   use {'junegunn/fzf.vim'}
@@ -32,11 +31,15 @@ local cb = function(use)
 
   -- lsp
   use {'neovim/nvim-lspconfig'}
-  use {'williamboman/nvim-lsp-installer'}
+  use {'williamboman/mason.nvim'}
+  use {'williamboman/mason-lspconfig.nvim'}
   use {'nvim-lua/lsp-status.nvim'}
+  use {'onsails/lspkind-nvim'}
+
+  -- completion
   use {'hrsh7th/nvim-cmp'}
-  use {'hrsh7th/cmp-vsnip', requires = 'hrsh7th/nvim-cmp'}
-  use {'hrsh7th/vim-vsnip'}
+  -- use {'hrsh7th/cmp-vsnip', requires = 'hrsh7th/nvim-cmp'}
+  -- use {'hrsh7th/vim-vsnip'}
   use {'hrsh7th/cmp-path', requires = 'hrsh7th/nvim-cmp'}
   use {'hrsh7th/cmp-nvim-lsp', requires = 'hrsh7th/nvim-cmp'}
   use {'hrsh7th/cmp-buffer', requires = 'hrsh7th/nvim-cmp'}
@@ -45,7 +48,11 @@ local cb = function(use)
     run = './install.sh',
     requires = 'hrsh7th/nvim-cmp'
   }
-  use {'onsails/lspkind-nvim'}
+  use('simrat39/inlay-hints.nvim')
+
+  -- snippets
+  use {'L3MON4D3/LuaSnip'}
+  use {'saadparwaiz1/cmp_luasnip'}
 
   use {'windwp/nvim-autopairs'}
   use {'simrat39/rust-tools.nvim'}

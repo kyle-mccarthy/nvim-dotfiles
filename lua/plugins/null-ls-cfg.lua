@@ -21,7 +21,9 @@ null_ls.setup(
       null_ls.builtins.diagnostics.mypy,
 
       -- docs
-      null_ls.builtins.diagnostics.vale
+      null_ls.builtins.diagnostics.vale,
+
+      -- null_ls.builtins.formatting.
     }
   }
 )
